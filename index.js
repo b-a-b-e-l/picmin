@@ -5,11 +5,6 @@ const scoreDisplay = document.getElementById('score')
 let score = 0
 
 //Define the layout / map
-  // 0 - pac-dots
-  // 1 - wall
-  // 2 - ghost-lair
-  // 3 - power-pellet
-  // 4 - empty
 
 const layout = [
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -68,6 +63,7 @@ let pacmanCurrentIndex = 490
 squares[pacmanCurrentIndex].classList.add('pacman')
 
 // Control pacman
+
 function control(event) {
     squares[pacmanCurrentIndex].classList.remove('pacman')
     switch(event.key) {
@@ -153,6 +149,8 @@ function control(event) {
 squares[pacmanCurrentIndex].classList.add('pacman')
 pacDotEaten()
 powerPelletEaten()
+checkGameOver()
+checkWin()
 }
 
 document.addEventListener('keyup', control)
@@ -242,6 +240,7 @@ function moveGhost(ghost) {
             score += 100
             squares[ghost.currentIndex].classList.add(ghost.className, 'ghost')
         }
+
     }, ghost.speed )
 }
 
@@ -249,12 +248,22 @@ function moveGhost(ghost) {
 
 function checkGameOver() {
     if (
-        !ghost.isScared && 
-        squares[ghost.currentIndex].classList.contains('pacman')
+        squares[pacmanCurrentIndex].classList.contains('ghost') && 
+        !squares[pacmanCurrentIndex].classList.contains('scared-ghost') 
         ) {
-            clearInterval(ghost.timerId)
+            ghosts.forEach(ghost => clearInterval(ghost.timerId))
             document.removeEventListener('keyup', control)
             scoreDisplay.innerHTML = 'Game O V E R'
         }
 
+}
+
+// Check win game
+
+function checkWin() {
+    if (score === 300) {
+        ghosts.forEach(ghost => clearInterval(ghost.timerId))
+        document.removeEventListener('keyup', control)
+        scoreDisplay.innerHTML = 'Winnerrrrr'
+    }
 }

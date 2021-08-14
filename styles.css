@@ -1,5 +1,9 @@
 html body {
     margin: 10px;
+    background-color: #1E3343;
+    font-family: 'Press Start 2P', monospace;
+    text-align: center;
+    color: #FFD8EC; 
 }
 
 .grid {
@@ -7,8 +11,9 @@ html body {
     flex-wrap: wrap;
     width: 504px;
     height: 504px;
-    border: 0.77px solid salmon;
+    border: 0.77px solid #FFD8EC;
     margin: 0 auto;
+    background-color: #1E3343;
 }
 
 .grid div {
@@ -18,46 +23,52 @@ html body {
 
 .pac-dot {
     background-color: mediumaquamarine;
-    border: 5px solid white;
+    border: 5px solid #1E3343;
     box-sizing: border-box;
+    border-radius: 8px;
 }
 
 .wall {
-    background-color: violet;
+    background-color: #5e7282;
 }
 
 .power-pellet {
-    background-color: mediumvioletred;
+    background-color: #FFF7D6;
     border-radius: 8px;
 }
 
 .pacman {
-    background-color: chartreuse;
-    border: none;
+    background-color: #fcff68;
+    box-sizing: border-box;
+    border: 0.33px dotted white;
     border-radius: 9px;
 }
 
 .blinky {
-    background-color: red;
+    background-color: #c39dea;
     border: none;
 }
 
 .pinky {
-    background-color: pink;
+    background-color: #F784EB;
     border: none;
 } 
 
 .inky {
-    background-color: blue;
+    background-color: #01EBF2;
     border: none;
 }
 
 .clyde {
-    background-color: brown;
+    background-color: #4BED75;
     border: none
 }
 
 .scared-ghost {
-    background-color: darkslateblue;
+    background-color: #470D7C;
     border: none
+}
+
+.ghost {
+    border-radius: 8px 8px 0 0;
 }
