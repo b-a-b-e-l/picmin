@@ -5,7 +5,6 @@ const scoreDisplay = document.getElementById('score')
 let score = 0
 
 //Define the layout / map
-
 const layout = [
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -55,15 +54,14 @@ function createBoard() {
         }
     }
 }
+
 createBoard()
 
 // Define starting point for pacman
-
 let pacmanCurrentIndex = 490
 squares[pacmanCurrentIndex].classList.add('pacman')
 
 // Control pacman
-
 function control(event) {
     squares[pacmanCurrentIndex].classList.remove('pacman')
     switch(event.key) {
@@ -74,16 +72,14 @@ function control(event) {
                 pacmanCurrentIndex + width < width * width
                 ) 
             pacmanCurrentIndex +=width
-            console.log('down')
         break
-        case "Down":
+        case "Down": // IE
             if (
                 !squares[pacmanCurrentIndex + width].classList.contains('wall') &&
                 !squares[pacmanCurrentIndex + width].classList.contains('ghost-lair') &&
                 pacmanCurrentIndex + width < width * width
                 ) 
             pacmanCurrentIndex +=width
-            console.log('down')
         break
         case "ArrowUp":
             if (
@@ -91,18 +87,15 @@ function control(event) {
                 pacmanCurrentIndex - width > 0
                 )
             pacmanCurrentIndex -=width
-            console.log('up')
         break
-        case "Up":
+        case "Up": // IE
             if (
                 !squares[pacmanCurrentIndex - width].classList.contains('wall') &&
                 pacmanCurrentIndex - width > 0
                 )
             pacmanCurrentIndex -=width
-            console.log('up')
         break
         case "ArrowLeft":
-            console.log('left')
             if (
                 !squares[pacmanCurrentIndex -1].classList.contains('wall') &&
                 pacmanCurrentIndex % width !== 0
@@ -112,8 +105,7 @@ function control(event) {
                     pacmanCurrentIndex = 391
                 }
         break
-        case "Left":
-            console.log('left')
+        case "Left": // IE
             if (
                 !squares[pacmanCurrentIndex - 1].classList.contains('wall') &&
                 pacmanCurrentIndex % width !== 0
@@ -129,18 +121,16 @@ function control(event) {
                 pacmanCurrentIndex % width !== 28 - 1
                 ) 
             pacmanCurrentIndex +=1
-            console.log('right')
             if (pacmanCurrentIndex === 391) {
                 pacmanCurrentIndex = 364
             }
         break
-        case "Right":
+        case "Right": // IE
             if (
                 !squares[pacmanCurrentIndex + 1].classList.contains('wall') &&
                 pacmanCurrentIndex % width !== 28 - 1
                 ) 
             pacmanCurrentIndex +=1
-            console.log('right')
             if (pacmanCurrentIndex === 391) {
                 pacmanCurrentIndex = 364
             }
@@ -178,7 +168,6 @@ function unScareGhost() {
 }
 
 // Create ghosts
-
 class Ghost {
     constructor(className, startIndex, speed) {
         this.className = className
@@ -204,14 +193,11 @@ ghosts.forEach(ghost => {
     })
 
 // Move ghosts
-
 ghosts.forEach(ghost => moveGhost(ghost))
 
 function moveGhost(ghost) {
-    console.log('ghost moved!')
     const directions = [-1, +1, -width, +width]
     let direction = directions[Math.floor(Math.random() * directions.length)]
-    console.log(direction)
 
     ghost.timerId = setInterval( function() {
         if (
@@ -234,7 +220,6 @@ function moveGhost(ghost) {
             ghost.isScared && 
             squares[ghost.currentIndex].classList.contains('pacman')
             ) {
-            console.log('te comi')
             squares[ghost.currentIndex].classList.remove(ghost.className, 'ghost', 'scared-ghost')
             ghost.currentIndex = ghost.startIndex
             score += 100
@@ -245,7 +230,6 @@ function moveGhost(ghost) {
 }
 
 // Check game over
-
 function checkGameOver() {
     if (
         squares[pacmanCurrentIndex].classList.contains('ghost') && 
@@ -259,11 +243,10 @@ function checkGameOver() {
 }
 
 // Check win game
-
 function checkWin() {
     if (score === 300) {
         ghosts.forEach(ghost => clearInterval(ghost.timerId))
         document.removeEventListener('keyup', control)
-        scoreDisplay.innerHTML = 'Winnerrrrr'
+        scoreDisplay.innerHTML = 'Winnerrrrr !!'
     }
 }

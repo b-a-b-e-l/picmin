@@ -71,4 +71,6 @@ html body {
 
 .ghost {
     border-radius: 8px 8px 0 0;
+    box-sizing: border-box;
+    border-bottom: 2.75px dotted #1E3343;
 }
